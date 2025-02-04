@@ -342,7 +342,7 @@
             let generate
             if (COMPLETED_CHECKPOINTS == CHECKPOINTS) {
                 generate = true
-                desc.textContent = "Click <b>'Create Key'</b> to create your validated key."
+                desc.innerHtml = "Click <b>'Create Key'</b> to create your validated key."
             }
             document.getElementById("TARGET_SERVICE").textContent = SERVICE
             document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
@@ -388,7 +388,7 @@
                                             h += (s.charCodeAt(i) * 2).toString(16)
                                         }
                                         key = h
-                                        desc.textContent = h
+                                        desc.innerHtml = h
                                         cn.textContent = "➛ Copy Key"
                                         can_copy = true
                                     }, 2000)
