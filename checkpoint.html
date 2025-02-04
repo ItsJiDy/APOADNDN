@@ -287,20 +287,33 @@
                 a.style["background-color"] = "red"
         }
         if (ru) {
-            let USER_ID = parseInt(storage.USER_ID)
-            let CHECKPOINTS = storage.CHECKPOINTS || 1
-            let COMPLETED_CHECKPOINTS = parseInt(storage.COMPLETED_CHECKPOINTS) || 0
-            let SERVICE = storage.SERVICE || "Linkvertise"
-            let KEY_DURATION = storage.KEY_DURATION || 6
-            if (!USER_ID) {
+            let unique_key = parseInt(storage._o_kf_g) || ""
+            if (!USER_ID || unique_key == "") {
                 window.location.href = "https://overdrivehub.netlify.app/key_services"
             }
+            const services = [
+                "Linkvertise",
+                "LootLabs"
+            ]
+            const diu = [
+                [1, 6],
+                [2, 12],
+                [3, 24],
+                [5, 48],
+                [8, 72]
+            ]
+            const tr = diu[((storage.__r_osq || 1) / unique_key) - 1]
+            let USER_ID = (parseInt(storage.__d__wn) || 1) / unique_key
+            let COMPLETED_CHECKPOINTS = (parseInt(storage_a_dt) || 0) / unique_key
+            let SERVICE = services[((parseInt(storage._sr_o) || 1) / unique_key) - 1]
+            let CHECKPOINTS = tr[0]
+            let KEY_DURATION = tr[1]
             const ref = document.referrer
             if (performance.navigation.type !== performance.navigation.TYPE_RELOAD) {
                 if (SERVICE == "Linkvertise" && ref == "https://linkvertise.com/" && storage.___) {
                     storage.___ = false
                     COMPLETED_CHECKPOINTS ++
-                    storage.COMPLETED_CHECKPOINTS = storage.COMPLETED_CHECKPOINTS
+                    storage.COMPLETED_CHECKPOINTS = storage.COMPLETED_CHECKPOINTS * unique_key
                 }
             }
             document.getElementById("TARGET_SERVICE").textContent = SERVICE
