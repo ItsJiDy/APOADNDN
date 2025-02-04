@@ -179,7 +179,7 @@
             margin: 2rem auto;
             width: auto;
             max-width: 400px;
-            height: 250px;
+            height: 300px;
             background-color: rgba(20, 20, 50, 0.3); /* Blue background and shit */
             border: 1px solid #555; /* Border */
             border-radius: 5px;
@@ -263,7 +263,7 @@
             </div>
         </div>
         <div class="main" id="v">
-            <h1>Key Services</h1> Your HWID: <b id="hwid">Not Found</b>
+            <h1>Key System</h1>
             <div class="image-container" id="checkpoint-container">
                 <div class="title">
                     Authentication
@@ -278,7 +278,6 @@
             </footer>
             <script>
                 let ru = true
-                const Heads = new Headers();
         let storage = localStorage
         if (!storage) {
             ru = false
@@ -296,7 +295,7 @@
             if (!USER_ID) {
                 window.location.href = "https://overdrivehub.netlify.app/key_services"
             }
-            const ref = Heads.get('Referer')
+            const ref = document.referrer
             if (ref) {
                 alert(ref)
             }
