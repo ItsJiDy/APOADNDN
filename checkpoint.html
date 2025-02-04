@@ -288,39 +288,37 @@
                 a.style["background-color"] = "red"
         }
         if (ru) {
-            let USER_ID = storage.USER_ID
-            let CHECKPOINTS = storage.CHECKPOINTS
+            let USER_ID = parseInt(storage.USER_ID)
+            let CHECKPOINTS = storage.CHECKPOINTS || 1
             let COMPLETED_CHECKPOINTS = parseInt(storage.COMPLETED_CHECKPOINTS) || 0
-            let SERVICE = storage.SERVICE
-            let KEY_DURATION = storage.KEY_DURATION
-            alert(SERVICE + " " + USER_ID + " " + CHECKPOINTS + " " + COMPLETED_CHECKPOINTS + " " + KEY_DURATION)
-            if (SERVICE && USER_ID && CHECKPOINTS && COMPLETED_CHECKPOINTS && KEY_DURATION) {
-                const ref = Heads.get('Referer')
-                if (ref) {
-                    alert(ref)
-                }
-                document.getElementById("TARGET_SERVICE").textContent = SERVICE
-                document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
-                document.getElementById("COMPLETED_CHECKPOINTS").textContent = COMPLETED_CHECKPOINTS
-                document.getElementById("CHECKPOINTS").textContent = CHECKPOINTS
-                const cn = document.getElementById("continue")
-                let s = 9
-                function d() {
-                    if (s !== 1) {
-                        s --
-                        cn.textContent = "Please wait " + s + " seconds"
-                        setTimeout(d, 1000)
-                    } else {
-                        cn.textContent = "Continue"
-                        cn.addEventListener('click', function() {
-                            window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
-                        })
-                    }
-                }
-                d()
-            } else {
+            let SERVICE = storage.SERVICE || "Linkvertise"
+            let KEY_DURATION = storage.KEY_DURATION || 6
+            if (!USER_ID) {
                 window.location.href = "https://overdrivehub.netlify.app/key_services"
             }
+            const ref = Heads.get('Referer')
+            if (ref) {
+                alert(ref)
+            }
+            document.getElementById("TARGET_SERVICE").textContent = SERVICE
+            document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
+            document.getElementById("COMPLETED_CHECKPOINTS").textContent = COMPLETED_CHECKPOINTS
+            document.getElementById("CHECKPOINTS").textContent = CHECKPOINTS
+            const cn = document.getElementById("continue")
+            let s = 9
+            function d() {
+                if (s !== 1) {
+                    s --
+                    cn.textContent = "Please wait " + s + " seconds"
+                    setTimeout(d, 1000)
+                } else {
+                    cn.textContent = "Continue"
+                    cn.addEventListener('click', function() {
+                        window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
+                    })
+                }
+            }
+            d()
         }
         function toggleMenu() {
             var menuContainer = document.getElementById("menuContainer");
