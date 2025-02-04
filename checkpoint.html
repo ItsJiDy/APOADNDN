@@ -296,8 +296,12 @@
                 window.location.href = "https://overdrivehub.netlify.app/key_services"
             }
             const ref = document.referrer
-            if (ref) {
-                alert(ref)
+            if (performance.navigation.type !== performance.navigation.TYPE_RELOAD) {
+                if (SERVICE == "Linkvertise" && ref == "https://linkvertise.com/" && storage.___) {
+                    storage.___ = false
+                    COMPLETED_CHECKPOINTS ++
+                    storage.COMPLETED_CHECKPOINTS = storage.COMPLETED_CHECKPOINTS
+                }
             }
             document.getElementById("TARGET_SERVICE").textContent = SERVICE
             document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
@@ -313,7 +317,12 @@
                 } else {
                     cn.textContent = "Continue"
                     cn.addEventListener('click', function() {
-                        window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
+                        storage.___ = true
+                        setTimeout(function() {
+                            if (SERVICE == "Linkvertise") {
+                                window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
+                            }
+                        }, 500)
                     })
                 }
             }
