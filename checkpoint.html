@@ -128,7 +128,7 @@
 
         /* Rotate icon when expanded */
         .rotating {
-            transform: rotate(90deg);
+            transform: rotate(135deg);
         }
         .main {
             text-align: center;
@@ -343,7 +343,7 @@
             let generate
             if (COMPLETED_CHECKPOINTS == CHECKPOINTS) {
                 generate = true
-                desc.innerHtml = "Click <b>'Create Key'</b> to create your validated key."
+                desc.innerText = "Click <b>'Create Key'</b> to create your validated key."
             }
             document.getElementById("TARGET_SERVICE").textContent = SERVICE
             document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
@@ -371,6 +371,10 @@
                             if (can_copy) {
                                 if (key) {
                                     navigator.clipboard.writeText(key)
+                                    cn.textContent = "Copied to Clipboard!"
+                                    setTimeout(function() {
+                                        cn.textContent = "➛ Copy Key"
+                                    }, 1000)
                                 }
                             } else {
                                 if (!generate) {
@@ -389,7 +393,7 @@
                                             h += (s.charCodeAt(i) * 2).toString(16)
                                         }
                                         key = h
-                                        desc.innerHtml = h
+                                        desc.innerText = h
                                         cn.textContent = "➛ Copy Key"
                                         can_copy = true
                                     }, 2000)
@@ -406,14 +410,11 @@
             var menuIcon = document.getElementById("menuIcon");
 
             if (menuContainer.classList.contains("expand")) {
-                menuIcon.textContent = "+"; // Change back immediately
                 menuIcon.classList.remove("rotating");
                 menuContainer.classList.remove("expand");
             } else {
                 menuContainer.classList.add("expand");
                 menuIcon.classList.add("rotating");
-
-                    menuIcon.textContent = "×";
             }
         }
 
