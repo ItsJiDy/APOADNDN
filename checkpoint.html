@@ -274,7 +274,8 @@
                     Completed <b id="COMPLETED_CHECKPOINTS">0</b> of <b id="CHECKPOINTS">3</b>
                     <br>Key Duration: <b id="KEY_DURATION">0 Hours</b></br>
                     Target Service: <b id="TARGET_SERVICE">Linkvertise</b>
-                    <p id="desc">Click <b>'Continue'</b> in order to proceed to the next checkpoint.</p>
+                    <p style="word-wrap: break-word;"id="desc">Click <b>'Continue'</b> in order to proceed to the next checkpoint.</p>
+
                     <a class="button" id="continue">Please wait 0 seconds</a>
                     <footer>Thank you for using Overdrive H.</footer>
                 </div>
@@ -306,7 +307,7 @@
             ]
             const tr = diu[((storage.__r_osq || 1) / unique_key) - 1]
             let USER_ID = (parseInt(storage.__d__wn) || 1) / unique_key
-            let COMPLETED_CHECKPOINTS = (parseInt(storage._a_dt) || 0) / unique_key
+            let COMPLETED_CHECKPOINTS =1// (parseInt(storage._a_dt) || 0) / unique_key
             let SERVICE = (parseInt(storage._sr_o) || 1) / unique_key
             let CHECKPOINTS = tr[0]
             let KEY_DURATION = tr[1]
@@ -343,7 +344,7 @@
             let generate
             if (COMPLETED_CHECKPOINTS == CHECKPOINTS) {
                 generate = true
-                desc.innerText = "Click <b>'Create Key'</b> to create your validated key."
+                desc.innerHTML = "Click <b>'Create Key'</b> to create your validated key."
             }
             document.getElementById("TARGET_SERVICE").textContent = SERVICE
             document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
