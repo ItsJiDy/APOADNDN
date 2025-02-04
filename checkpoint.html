@@ -272,9 +272,10 @@
                 </div>
                 <div class="description">
                     Completed <b id="COMPLETED_CHECKPOINTS">0</b> of <b id="CHECKPOINTS">3</b>
-                    <br>Key Duration: <b id="KEY_DURATION">0 Hours</b><br>
+                    <br>Key Duration: <b id="KEY_DURATION">0 Hours</b></br>
                     Target Service: <b id="TARGET_SERVICE">Linkvertise</b>
-                    <p id="desc">Click <b>'Continue'</b> in order to proceed to the next checkpoint.</p><br></br><a class="button" id="continue">Please wait 0 seconds</a>
+                    <p id="desc">Click <b>'Continue'</b> in order to proceed to the next checkpoint.</p>
+                    <a class="button" id="continue">Please wait 0 seconds</a>
                     <footer>Thank you for using Overdrive H.</footer>
                 </div>
             </div>
@@ -381,8 +382,8 @@
                                 } else {
                                     cn.textContent = "..."
                                     setTimeout(function() {
-                                        const s = USER_ID.toString() + "_" + Math.floor(Date.now() / 100).toString()
-                                        var s = unescape(encodeURIComponent(s))
+                                        let s = USER_ID.toString() + "_" + Math.floor(Date.now() / 100).toString()
+                                        s = unescape(encodeURIComponent(s))
                                         var h = ''
                                         for (var i = 0; i < s.length; i++) {
                                             h += (s.charCodeAt(i) * 2).toString(16)
