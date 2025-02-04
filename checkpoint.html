@@ -248,7 +248,8 @@
     <body>
         <div class="all">
             <div class="top-bar">
-                <div class="left-side"><img src="https://raw.githubusercontent.com/ItsJiDy/Overdrive-H/refs/heads/main/images/fav_icon.png" alt="Logo" class="logo"> <!-- Replace with your logo -->
+                <div class="left-side">
+                    <img src="https://raw.githubusercontent.com/ItsJiDy/Overdrive-H/refs/heads/main/images/fav_icon.png" alt="Logo" class="logo"> <!-- Replace with your logo -->
                     <div class="title">
                         Overdrive H
                     </div>
@@ -258,7 +259,8 @@
                 </div>
             </div>
             <div class="menu-container" id="menuContainer">
-                <div class="menu-items"><a href="https://overdrivehub.xyz/">Home</a> <a href="https://discord.gg/dudJwCefnQ">Discord</a>
+                <div class="menu-items">
+                    <a href="https://overdrivehub.xyz/">Home</a> <a href="https://discord.gg/dudJwCefnQ">Discord</a>
                 </div>
             </div>
         </div>
@@ -269,8 +271,10 @@
                     Authentication
                 </div>
                 <div class="description">
-                    Completed <b id="COMPLETED_CHECKPOINTS">0</b> of <b id="CHECKPOINTS">3</b><br>Key Duration: <b id="KEY_DURATION">0 Hours</b><br> Target Service: <b id="TARGET_SERVICE">Linkvertise</b>
-                    <p></p>Click <b>'Continue'</b> to proceed in the next checkpoint.<br><br><a class="button" id="continue">Please wait 0 seconds</a>
+                    Completed <b id="COMPLETED_CHECKPOINTS">0</b> of <b id="CHECKPOINTS">3</b>
+                    <br>Key Duration: <b id="KEY_DURATION">0 Hours</b><br>
+                    Target Service: <b id="TARGET_SERVICE">Linkvertise</b>
+                    <p id="desc">Click <b>'Continue'</b> in order to proceed to the next checkpoint.<br><br><a class="button" id="continue">Please wait 0 seconds</a></p>
                 </div>
             </div>
             <footer>
@@ -313,7 +317,7 @@
                 window.location.href = "https://overdrivehub.netlify.app/key_services"
             }
             if (performance.navigation.type !== performance.navigation.TYPE_RELOAD) {
-                if (SERVICE == "Linkvertise" && ref == "https://linkvertise.com/" && storage.___) {
+                if (((SERVICE == "Linkvertise" && ref == "https://linkvertise.com/") || (SERVICE == "LootLabs" && ref == "https://loot-link.com")) && storage.___) {
                     storage.___ = false
                     let ee = storage._dfw_a_qi
                     let ww
@@ -331,9 +335,12 @@
                     } else {
                         alert("bypass detected!")
                     }
-                } else if (ref) {
-                    alert(ref)
                 }
+            }
+            let generate
+            if (COMPLETED_CHECKPOINTS == CHECKPOINTS) {
+                generate = true
+                document.getElementById("desc").innerHtml = "Click <b>'Create Key'</b> to create your validated key."
             }
             document.getElementById("TARGET_SERVICE").textContent = SERVICE
             document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
@@ -347,7 +354,11 @@
                     cn.textContent = "Please wait " + s + " seconds"
                     setTimeout(d, 1000)
                 } else {
-                    cn.textContent = "Continue"
+                    if (generate) {
+                        cn.textContent = "➛ Create Key"
+                    } else {
+                        cn.textContent = "➛ Continue"
+                    }
                     cn.addEventListener('click', function() {
                         storage.___ = true
                         storage._dfw_a_qi = Date.now() / 1000 // TICK
