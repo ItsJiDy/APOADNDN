@@ -275,6 +275,7 @@
                     <br>Key Duration: <b id="KEY_DURATION">0 Hours</b><br>
                     Target Service: <b id="TARGET_SERVICE">Linkvertise</b>
                     <p id="desc">Click <b>'Continue'</b> in order to proceed to the next checkpoint.<br><br><a class="button" id="continue">Please wait 0 seconds</a></p>
+                    <footer>Thank you for using Overdrive H.</footer>
                 </div>
             </div>
             <footer>
@@ -337,10 +338,11 @@
                     }
                 }
             }
+            const desc = document.getElementById("desc")
             let generate
             if (COMPLETED_CHECKPOINTS == CHECKPOINTS) {
                 generate = true
-                document.getElementById("desc").innerHtml = "Click <b>'Create Key'</b> to create your validated key."
+                desc.textContent = "Click <b>'Create Key'</b> to create your validated key."
             }
             document.getElementById("TARGET_SERVICE").textContent = SERVICE
             document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
@@ -359,14 +361,38 @@
                     } else {
                         cn.textContent = "➛ Continue"
                     }
+                    let can_copy
+                    let key
                     cn.addEventListener('click', function() {
                         storage.___ = true
                         storage._dfw_a_qi = Date.now() / 1000 // TICK
                         setTimeout(function() {
-                            if (SERVICE == "Linkvertise") {
-                                window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
-                            } else if (SERVICE == "LootLabs") {
-                                window.location.href = "https://loot-link.com/s?YB1teGoY"
+                            if (can_copy) {
+                                if (key) {
+                                    navigator.clipboard.writeText(key)
+                                }
+                            } else {
+                                if (!generate) {
+                                    if (SERVICE == "Linkvertise") {
+                                        window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
+                                    } else if (SERVICE == "LootLabs") {
+                                        window.location.href = "https://loot-link.com/s?YB1teGoY"
+                                    }
+                                } else {
+                                    cn.textContent = "..."
+                                    setTimeout(function() {
+                                        const s = USER_ID.toString() + "_" + Math.floor(Date.now() / 100).toString()
+                                        var s = unescape(encodeURIComponent(s))
+                                        var h = ''
+                                        for (var i = 0; i < s.length; i++) {
+                                            h += (s.charCodeAt(i) * 2).toString(16)
+                                        }
+                                        key = h
+                                        desc.textContent = h
+                                        cn.textContent = "➛ Copy Key"
+                                        can_copy = true
+                                    }, 2000)
+                                }
                             }
                         }, 500)
                     })
