@@ -316,10 +316,16 @@
                 if (SERVICE == "Linkvertise" && ref == "https://linkvertise.com/" && storage.___) {
                     storage.___ = false
                     let ee = storage._dfw_a_qi
+                    let ww
                     if (!ee) {
                         ee = Date.now() / 1000
                     }
-                    if (((Date.now() / 1000) - ee) > 5) {
+                    if (SERVICE == "Linkvertise") {
+                        ww = 8
+                    } else if (SERVICE == "LootLabs") {
+                        ww = 20
+                    }
+                    if (((Date.now() / 1000) - ee) > ww) {
                         COMPLETED_CHECKPOINTS ++
                         storage._a_dt = storage.COMPLETED_CHECKPOINTS * unique_key
                     } else {
@@ -348,6 +354,8 @@
                         setTimeout(function() {
                             if (SERVICE == "Linkvertise") {
                                 window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
+                            } else if (SERVICE == "LootLabs") {
+                                window.location.href = "https://loot-link.com/s?YB1teGoY"
                             }
                         }, 500)
                     })
