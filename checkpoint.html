@@ -294,7 +294,7 @@
         const urlParams = new URLSearchParams(queryString);
         let hash = urlParams.get('hash') || ""
                 let ru = true
-        let storage = localStorage
+        let storage = window.localStorage || localStorage
         if (!storage) {
             ru = false
             alert("Your browser aren't supported.")
@@ -303,9 +303,9 @@
                 a.style["background-color"] = "red"
         }
         if (ru) {
-            let unique_key = parseInt(storage._o_kf_g) || ""
+            let unique_key = parseInt(storage.getItem("_o_kf_g")) || ""
             if (!unique_key || unique_key == "") {
-                window.location.href = "https://overdrivehub.netlify.app/key_services?HWID=" + (storage.HWID || "");
+                window.location.href = "https://overdrivehub.netlify.app/key_services?HWID=" + (storage.getItem("HWID") || "");
             }
             const diu = [
                 [1, 6, 21600],
@@ -314,10 +314,10 @@
                 [5, 48, 172800],
                 [8, 72, 259200]
             ]
-            const tr = diu[((storage.__r_osq || 1) / unique_key) - 1]
-            let USER_ID = (parseInt(storage.__d__wn) || 1) / unique_key
-            let COMPLETED_CHECKPOINTS = (parseInt(storage._a_dt) || 0) / unique_key
-            let SERVICE = (parseInt(storage._sr_o) || 1) / unique_key
+            const tr = diu[((storage.getItem("__r_osq") || 1) / unique_key) - 1]
+            let USER_ID = (parseInt(storage.getItem("__d__wn")) || 1) / unique_key
+            let COMPLETED_CHECKPOINTS = (parseInt(storage.getItem("_a_dt")) || 0) / unique_key
+            let SERVICE = (parseInt(storage.getItem("_sr_o")) || 1) / unique_key
             let CHECKPOINTS = tr[0]
             let KEY_DURATION = tr[1]
             const desc = document.getElementById("desc")
@@ -334,16 +334,16 @@
             } else {
                 window.location.href = "https://overdrivehub.netlify.app/key_services"
             }
-            const de = storage.a_q_w_d || ""
+            const de = storage.getItem("a_q_w_d") || ""
             if (de && de !== "" && de.length > 10) {
                 desc.innerText = h
                 cn.textContent = "➛ Copy Key"
                 can_copy = true
                 reg = true
             }
-            if (((SERVICE == "Linkvertise" && ref == "https://linkvertise.com/" && hash !== "" && hash.length > 50) || (SERVICE == "LootLabs" && ref == "https://loot-link.com/")) && storage.___) {
-                storage.___ = false
-                let ee = storage._dfw_a_qi
+            if (((SERVICE == "Linkvertise" && ref == "https://linkvertise.com/" && hash !== "" && hash.length > 50) || (SERVICE == "LootLabs" && ref == "https://loot-link.com/")) && storage.getItem("___")) {
+                storage.setItem("___", false)
+                let ee = storage.getItem("_dfw_a_qi")
                 let ww
                 if (!ee) {
                     ee = Date.now() / 1000
@@ -354,14 +354,14 @@
                     ww = 25
                 }
                 if (((Date.now() / 1000) - ee) > ww) {
-                    storage._a_dt = storage.(COMPLETED_CHECKPOINTS + 1) * unique_key
-                    storage._dfw_a_qi = Date.now()
                     COMPLETED_CHECKPOINTS ++;
+                    storage.setItem("_a_dt", COMPLETED_CHECKPOINTS * unique_key)
+                    storage.setItem("_dfw_a_qi", Date.now())
                 } else {
                     alert("bypass detected!")
                 }
             }
-            alert(storage._a_dt / unique_key)
+            alert(storage.getItem("_a_dt") / unique_key)
             if (!can_copy && COMPLETED_CHECKPOINTS == CHECKPOINTS) {
                 generate = true
                 desc.innerHTML = "Click <b>'Create Key'</b> to create your validated key."
@@ -382,8 +382,8 @@
                         }
                     } else {
                         if (!generate) {
-                            storage.___ = true
-                            storage._dfw_a_qi = Date.now() / 1000
+                            storage.setItem("___", true)
+                            storage.setItem("_dfw_a_qi", Date.now() / 1000)
                             setTimeout(function() {
                                 if (SERVICE == "Linkvertise") {
                                     window.location.href = "https://link-hub.net/978899/overdrive-h-checkpoint1"
@@ -404,7 +404,7 @@
                                 desc.innerText = h
                                 cn.textContent = "➛ Copy Key"
                                 can_copy = true
-                                storage.a_q_w_d = h
+                                storage.setItem("a_q_w_d", h)
                             }, 2000)
                         }
                     }
