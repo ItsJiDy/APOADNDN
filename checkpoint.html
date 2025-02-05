@@ -336,7 +336,7 @@
             }
             const de = storage.getItem("a_q_w_d") || ""
             if (de && de !== "" && de.length > 10) {
-                desc.innerText = h
+                desc.innerText = de
                 cn.textContent = "➛ Copy Key"
                 can_copy = true
                 reg = true
@@ -361,7 +361,6 @@
                     alert("bypass detected!")
                 }
             }
-            alert(storage.getItem("_a_dt") / unique_key)
             if (!can_copy && COMPLETED_CHECKPOINTS == CHECKPOINTS) {
                 generate = true
                 desc.innerHTML = "Click <b>'Create Key'</b> to create your validated key."
@@ -370,6 +369,7 @@
             document.getElementById("KEY_DURATION").textContent = KEY_DURATION + " Hours"
             document.getElementById("COMPLETED_CHECKPOINTS").textContent = COMPLETED_CHECKPOINTS
             document.getElementById("CHECKPOINTS").textContent = CHECKPOINTS
+            let oh
             cn.addEventListener('click', function() {
                 if (reg) {
                     if (can_copy) {
@@ -392,20 +392,23 @@
                                 }
                             }, 500)
                         } else {
-                            cn.textContent = "..."
-                            setTimeout(function() {
-                                let s = USER_ID.toString() + "_" + (Math.floor(Date.now() / 1000) + tr[2]).toString()
-                                s = unescape(encodeURIComponent(s))
-                                var h = ''
-                                for (var i = 0; i < s.length; i++) {
-                                    h += (s.charCodeAt(i) * 2).toString(16)
-                                }
-                                key = h
-                                desc.innerText = h
-                                cn.textContent = "➛ Copy Key"
-                                can_copy = true
-                                storage.setItem("a_q_w_d", h)
-                            }, 2000)
+                            if (!oh) {
+                                oh = true
+                                cn.textContent = "..."
+                                setTimeout(function() {
+                                    let s = USER_ID.toString() + "_" + (Math.floor(Date.now() / 1000) + tr[2]).toString()
+                                    s = unescape(encodeURIComponent(s))
+                                    var h = ''
+                                    for (var i = 0; i < s.length; i++) {
+                                        h += (s.charCodeAt(i) * 2).toString(16)
+                                    }
+                                    key = h
+                                    desc.innerText = h
+                                    cn.textContent = "➛ Copy Key"
+                                    can_copy = true
+                                    storage.setItem("a_q_w_d", h)
+                                }, 2000)
+                            }
                         }
                     }
                 }
